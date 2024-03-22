@@ -21,8 +21,8 @@ namespace WindowsFormsApp5
             InitializeComponent();
 
             circle_obj = new circle(5);
-            triangle_obj = new triangle(8);
-            prism_obj = new prism(4, 6);
+            triangle_obj = new triangle(4);
+            prism_obj = new prism(4, 5);
 
         }
         
@@ -91,7 +91,7 @@ namespace WindowsFormsApp5
             }
             public double Square_prism()
             {
-                return side * side * Math.Pow(3, 0.5) / 2 + height * side * 3;
+                return Square_triangle() * 2 + height * side * 3;
             }
             public override double Square_calculVirt()
             {
@@ -130,8 +130,13 @@ namespace WindowsFormsApp5
 
         private void SquareNorm_Click(object sender, EventArgs e)
         {
-            
-            if (t is circle)
+            if (t is prism)
+            {
+                prism active = (prism)t;
+                double result = active.Square_prism();
+                MessageBox.Show("Площадь: " + result);
+            }
+            else if (t is circle)
             {
                 circle active = (circle)t;
                 double result = active.Square_circle();
@@ -141,12 +146,6 @@ namespace WindowsFormsApp5
             {
                 triangle active = (triangle)t;
                 double result = active.Square_triangle();
-                MessageBox.Show("Площадь: " + result);
-            }
-            else if (t is prism)
-            {
-                prism active = (prism)t;
-                double result = active.Square_prism();
                 MessageBox.Show("Площадь: " + result);
             }
             else if (t is paint)
